@@ -17,6 +17,7 @@ interface Slide {
 })
 export class SliderComponent implements OnInit {
   slides: Array<Object> = [];
+  currentIndex = 0;
   constructor(private _slideService: SlideService) { }
 
   ngOnInit() {
@@ -28,7 +29,28 @@ export class SliderComponent implements OnInit {
       this.slides.map((slide: Slide) => {
         slide.url = `http://source.unsplash.com/${slide.post_url.split('/')[slide.post_url.split('/').length - 1]}`;
       });
-      console.log(this.slides);
     });
+  }
+  nextSlide() {
+    const referenceSlides = document.getElementsByClassName('slide');
+    if (this.currentIndex === this.slides.length - 1) {
+      referenceSlides[this.currentIndex].style.display = 'none';
+      this.currentIndex = 0;
+    } else {
+      this.currentIndex += 1;
+      referenceSlides[this.currentIndex - 1].style.display = 'none';
+    }
+    referenceSlides[this.currentIndex].style.display = 'block';
+  }
+  previousSlide() {
+    const referenceSlides = document.getElementsByClassName('slide');
+    if (this.currentIndex === 0) {
+      referenceSlides[this.currentIndex].style.display = 'none';
+      this.currentIndex = this.slides.length -1;
+    } else {
+      this.currentIndex -= 1;
+      referenceSlides[this.currentIndex + 1].style.display = 'none';
+    }
+    referenceSlides[this.currentIndex].style.display = 'block';
   }
 }

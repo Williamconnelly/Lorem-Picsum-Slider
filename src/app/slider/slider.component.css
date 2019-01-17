@@ -1,0 +1,15 @@
+.slide-container {
+  max-width: 500px;
+  min-width: 500px;
+  max-height: 300px;
+  min-height: 300px;
+}
+
+.slide {
+  width: 100%;
+  display: block;
+}
+
+.slide:not(:first-child) {
+  display: none;
+}

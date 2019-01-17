@@ -1,6 +1,7 @@
-<p>
-  slider works!
-</p>
-<div *ngFor="let slide of slides">
-  <img src="{{ slide.url }}" alt="{{ slide.post_url }}">
+<div *ngIf="slides.length > 0" class="slider">
+  <div class="slide-container">
+    <img *ngFor="let slide of slides" class="slide" src="{{ slide.url }}" alt="{{ slide.post_url }}">
+  </div>
+  <button (click)=nextSlide()>NEXT</button>
+  <button (click)=previousSlide()>PREV</button>
 </div>

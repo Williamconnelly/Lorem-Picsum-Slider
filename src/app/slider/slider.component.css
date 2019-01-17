@@ -8,8 +8,39 @@
 .slide {
   width: 100%;
   display: block;
+  object-fit: cover;
 }
 
 .slide:not(:first-child) {
   display: none;
+}
+
+@keyframes from-right {
+  from {
+    right: -500px;
+    /* opacity: 0 */
+  } to {
+    right: 0;
+    /* opacity: 1 */
+  }
+}
+
+@keyframes from-left {
+  from {
+    left: -500px;
+    /* opacity: 0 */
+  } to {
+    left: 0;
+    /* opacity: 1 */
+  }
+}
+
+.slide-right {
+  position: relative;
+  animation: from-right 1s;
+}
+
+.slide-left {
+  position: relative;
+  animation: from-left 1s;
 }

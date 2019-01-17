@@ -2,6 +2,8 @@
   <div class="slide-container">
     <img *ngFor="let slide of slides" class="slide" src="{{ slide.url }}" alt="{{ slide.post_url }}">
   </div>
-  <button (click)=nextSlide()>NEXT</button>
-  <button (click)=previousSlide()>PREV</button>
 </div>
+<br><br>
+<button (click)=previousSlide()>PREV</button>
+<button (click)=nextSlide()>NEXT</button>
+<button (click)="toggleAutomate()">TOGGLE AUTO</button>

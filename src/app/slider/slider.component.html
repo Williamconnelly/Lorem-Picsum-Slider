@@ -3,10 +3,13 @@
     <figure *ngFor="let slide of slides" class="slide">
       <img src="{{ slide.url }}" alt="{{ slide.post_url }}" />
     </figure>
+    <a (click)=previousSlide($event) class="prev">&#10094;</a>
+    <a (click)=nextSlide($event) class="next">&#10095;</a>
   </div>
 </div>
-<button (click)=previousSlide($event)>PREV</button>
-<button (click)=nextSlide($event)>NEXT</button>
+<!-- <button (click)=previousSlide($event) class="prev">PREV</button>
+<button (click)=nextSlide($event) class="next">NEXT</button> -->
 <button (click)="toggleAutomate($event)" class="toggle">TOGGLE AUTO</button>
-
-
+<!--
+<a (click)=previousSlide($event) class="prev">&#10094;</a>
+<a (click)=nextSlide($event) class="next">&#10095;</a> -->

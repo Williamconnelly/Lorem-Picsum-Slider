@@ -1,16 +1,22 @@
 .slider {
   margin: 0 auto;
   width: 90%;
+  height: 100%;
   text-align: center;
 }
 
 .container {
   position: relative;
   overflow: hidden;
-  width: 500px;
-  height: 380px;
-  border: 1px solid black;
+  width: 60%;
+  height: 100%;
   display: inline-block;
+}
+
+@media only screen and (max-width: 880px) {
+  .container {
+    width: 100%;
+  }
 }
 
 .slide {
@@ -34,6 +40,9 @@ img {
 /* Transitional Classes */
 
 .center, .left, .right {
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
   transition: 0.3s;
 }
 
@@ -59,3 +68,34 @@ img {
   left: -100% !important;
 }
 
+.prev {
+  top: 50%;
+  left: 32.6%;
+}
+
+.next {
+  top: 50%;
+  left: 64.6%;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}

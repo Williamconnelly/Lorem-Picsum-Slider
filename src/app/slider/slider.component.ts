@@ -68,6 +68,12 @@ export class SliderComponent implements OnInit {
     // Swap classes to slide right
     eSlides[this.currentIndex].classList.remove('center');
     eSlides[this.currentIndex].classList.add('right');
+    // When previous is the first action, prepare the final img element to the left
+    if (this.currentIndex === 0) {
+      eSlides[this.slides.length - 1].classList.add('reset-left');
+      // Trigger DOM reflow to move the element before further animations
+      void eSlides[this.slides.length - 1].offsetWidth;
+    }
     // If on the first slide, move index to the end. If not, move 1 backwards
     this.currentIndex === 0 ? this.currentIndex = this.slides.length - 1 : this.currentIndex -= 1;
     // Swap classes and slide right into center position

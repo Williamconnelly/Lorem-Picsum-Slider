@@ -1,10 +1,16 @@
 /* Core Elements */
 
-.slider {
+.wrapper {
   margin: 0 auto;
   width: 100%;
   height: 33em;
   text-align: center;
+}
+
+.slider {
+  height: 100%;
+  width: 49em;
+  display: inline-block;
 }
 
 .container {
@@ -12,12 +18,6 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
-}
-
-.wrapper {
-  height: 100%;
-  width: 49em;
-  display: inline-block;
 }
 
 .option-tray {
@@ -196,10 +196,10 @@ img {
 /* Media Breakpoints */
 
 @media only screen and (max-width: 870px) {
-  .slider {
+  .wrapper {
     height: 23em;
   }
-  .wrapper {
+  .slider {
     width: 34em;
   }
   .modal-content {
@@ -209,10 +209,10 @@ img {
 }
 
 @media only screen and (max-width: 653px) {
-  .slider {
+  .wrapper {
     height: 15em;
   }
-  .wrapper {
+  .slider {
     width: 22em;
   }
   .modal-content {

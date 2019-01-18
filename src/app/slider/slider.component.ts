@@ -50,7 +50,9 @@ export class SliderComponent implements OnInit {
     };
     // Add event for clicking out of modal popup
     window.onclick = event => {
-      if (!event.target.matches('.picture')) {
+      // TODO: FInd better solution than type assertion
+      const event_cast_type = event as any;
+      if (!event_cast_type.target.matches('.picture')) {
         this.closeModal();
       }
     };
@@ -98,7 +100,7 @@ export class SliderComponent implements OnInit {
       this.stopAutomate();
     }
     // Grab all slide elements
-    const eSlides = document.getElementsByClassName('slide');
+    const eSlides = <HTMLCollectionOf<HTMLElement>> document.getElementsByClassName('slide');
     // Swap classes to slide right
     eSlides[this.currentIndex].classList.remove('center');
     eSlides[this.currentIndex].classList.add('right');

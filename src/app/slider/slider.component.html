@@ -1,9 +1,12 @@
 <div *ngIf="slides.length > 0" class="slider">
-  <div class="slide-container">
-    <img *ngFor="let slide of slides" class="slide" src="{{ slide.url }}" alt="{{ slide.post_url }}">
+  <div class="container">
+    <figure *ngFor="let slide of slides" class="slide">
+      <img src="{{ slide.url }}" alt="{{ slide.post_url }}" />
+    </figure>
   </div>
 </div>
-<br><br>
-<button (click)=previousSlide()>PREV</button>
-<button (click)=nextSlide()>NEXT</button>
-<button (click)="toggleAutomate()">TOGGLE AUTO</button>
+<button (click)=previousSlide($event)>PREV</button>
+<button (click)=nextSlide($event)>NEXT</button>
+<button (click)="toggleAutomate($event)" class="toggle">TOGGLE AUTO</button>
+
+

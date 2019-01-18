@@ -33,51 +33,67 @@ export class SliderComponent implements OnInit {
       });
     });
   }
-  // Advance slideshow forward
-  nextSlide() {
+  // Advance slideshow forwards
+  nextSlide(e) {
+    // If the interval is running, clear it when invoked by user input
+    if (e.target.className !== 'toggle') {
+      this.stopAutomate();
+    }
     // Grab all slide elements
-    const referenceSlides = document.getElementsByClassName('slide');
-    // If currently on the final slide, reset the index
+    const eSlides = document.getElementsByClassName('slide');
+    // Swap classes to slide left
+    eSlides[this.currentIndex].classList.remove('center');
+    eSlides[this.currentIndex].classList.add('left');
+    // If on the last slide, reset the index. If not, move 1 forward
+    this.currentIndex === this.slides.length - 1 ? this.currentIndex = 0 : this.currentIndex += 1;
+    // Swap classes and slide left into center position
+    eSlides[this.currentIndex].classList.remove('reset-right', 'left', 'right', 'reset-left');
+    eSlides[this.currentIndex].classList.add('center');
+    // If NOW on the final slide, reset the position of first slide. If not, reset the position of next slide.
     if (this.currentIndex === this.slides.length - 1) {
-      referenceSlides[this.currentIndex].style.display = 'none';
-      this.currentIndex = 0;
-      // else, increase the index by 1
+      eSlides[0].classList.add('reset-right');
     } else {
-      this.currentIndex += 1;
-      referenceSlides[this.currentIndex - 1].style.display = 'none';
+      eSlides[this.currentIndex + 1].classList.remove('reset-left');
+      eSlides[this.currentIndex + 1].classList.add('reset-right');
     }
-    // Set the slide of the new current index to visible
-    referenceSlides[this.currentIndex].classList.remove('slide-left');
-    referenceSlides[this.currentIndex].classList.add('slide-right');
-    referenceSlides[this.currentIndex].style.display = 'block';
   }
-  // Revert slideshow back
-  previousSlide() {
-    // Grab all slide elements
-    const referenceSlides = document.getElementsByClassName('slide');
-    // If currently on the first slide, move index to the last slide
-    if (this.currentIndex === 0) {
-      referenceSlides[this.currentIndex].style.display = 'none';
-      this.currentIndex = this.slides.length -1;
-      // else, reduce the index by 1
-    } else {
-      this.currentIndex -= 1;
-      referenceSlides[this.currentIndex + 1].style.display = 'none';
+  // Regress slideshow backawards
+  previousSlide(e) {
+    // If the interval is running, clear it when invoked by user input
+    if (e.target.className !== 'toggle') {
+      this.stopAutomate();
     }
-    // Set the slide of the new current index to visible
-    referenceSlides[this.currentIndex].classList.remove('slide-right');
-    referenceSlides[this.currentIndex].classList.add('slide-left');
-    referenceSlides[this.currentIndex].style.display = 'block';
+    // Grab all slide elements
+    const eSlides = document.getElementsByClassName('slide');
+    // Swap classes to slide right
+    eSlides[this.currentIndex].classList.remove('center');
+    eSlides[this.currentIndex].classList.add('right');
+    // If on the first slide, move index to the end. If not, move 1 backwards
+    this.currentIndex === 0 ? this.currentIndex = this.slides.length - 1 : this.currentIndex -= 1;
+    // Swap classes and slide right into center position
+    eSlides[this.currentIndex].classList.remove('reset-left', 'right', 'left', 'reset-right');
+    eSlides[this.currentIndex].classList.add('center');
+    // If NOW on the final slide, reset the position of first slide. If not, reset the position of next slide.
+    if (this.currentIndex === 0) {
+      eSlides[this.slides.length - 1].classList.add('reset-left');
+    } else {
+      eSlides[this.currentIndex - 1].classList.remove('reset-right');
+      eSlides[this.currentIndex - 1].classList.add('reset-left');
+    }
   }
   // Sets or clears an interval that calls nextSlide()
-  toggleAutomate() {
+  toggleAutomate(event) {
     if (this.interval !== null) {
-      clearInterval(this.interval);
-      this.interval = null;
+      this.stopAutomate();
     } else {
       this.interval = setInterval(() => {
-        this.nextSlide();
+        this.nextSlide(event);
       }, 2000);
     }
+  }
+  // Clears automate interval
+  stopAutomate() {
+  clearInterval(this.interval);
+    this.interval = null;
   }
 }

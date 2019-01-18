@@ -3,21 +3,21 @@
     <header class="header"><a href="https://picsum.photos/">Lorem Picsum Slider</a></header>
     <div class="container">
       <figure *ngFor="let slide of slides" class="slide">
-        <img src="{{ slide.url }}" alt="{{ slide.post_url }}" (click)="openModal(slide)"/>
+        <img src="{{ slide.url }}" alt="{{ slide.post_url }}" (click)="openModal(slide)" class="picture" />
       </figure>
     </div>
     <div class="option-tray">
-      <button (click)="previousSlide($event)" class="button">&#10094; Previous</button>
-      <button (click)="nextSlide($event)" class="button">Next &#10095;</button>
-      <button [ngClass]="interval === null ? 'innactive' : 'active'" (click)="toggleAutomate($event)" class="toggle button">
-        Automate: <span *ngIf="interval === null; else toggleOn">Off</span>
+      <button (click)="previousSlide($event)" class="button" id="prev-btn">&#10094; Previous</button>
+      <button (click)="nextSlide($event)" class="button" id="next-btn">Next &#10095;</button>
+      <button [ngClass]="interval === null ? 'innactive' : 'active'" (click)="toggleAutomate($event)" id="toggle-btn" class="toggle button">
+        Automate: <span *ngIf="interval === null; else toggleOn" class="toggle">Off</span>
         <ng-template #toggleOn>On</ng-template>
       </button>
     </div>
   </div>
   <div id="imgModal" class="modal">
     <div class="modal-content">
-      <img *ngIf="modalImg" src="{{ modalImg.url }}" alt="{{ modalImg.post_url }}">
+      <img *ngIf="modalImg" src="{{ modalImg.url }}" alt="{{ modalImg.post_url }}" class="picture">
       <span (click)="closeModal()" class="modal-btn">&times;</span>
     </div>
   </div>

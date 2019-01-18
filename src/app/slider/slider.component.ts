@@ -18,7 +18,7 @@ interface Slide {
 export class SliderComponent implements OnInit {
   slides: Array<Object> = [];
   currentIndex = 0;
-  // Upper-scope variable so that different methods can start and stop it
+  // Upper-scope variable so that different methods can set and clear it
   interval = null;
   modalImg: Slide;
   constructor(private _slideService: SlideService) { }
@@ -35,7 +35,6 @@ export class SliderComponent implements OnInit {
     });
     // Add event listeners for arrow keys
     window.onkeydown = event => {
-      console.log(event);
       if (event.key === 'ArrowRight') {
         this.nextSlide(event);
       }
@@ -49,13 +48,21 @@ export class SliderComponent implements OnInit {
         this.closeModal();
       }
     };
+    // Add event for clicking out of modal popup
     window.onclick = event => {
-
+      if (!event.target.matches('.picture')) {
+        this.closeModal();
+      }
     };
   }
   // Advance slideshow forwards
   nextSlide(e) {
-    console.log(e);
+    // Automatically apply focus to next button for animation
+    const button = document.getElementById('next-btn');
+    button.focus();
+    setTimeout(() => {
+      button.blur();
+    }, 200);
     // If the interval is running, clear it when invoked by user input
     if (e.target.classList[0] !== 'toggle') {
       this.stopAutomate();
@@ -80,6 +87,12 @@ export class SliderComponent implements OnInit {
   }
   // Regress slideshow backawards
   previousSlide(e) {
+    // Automatically apply focus to prev button for animation
+    const button = document.getElementById('prev-btn');
+    button.focus();
+    setTimeout(() => {
+      button.blur();
+    }, 200);
     // If the interval is running, clear it when invoked by user input
     if (e.target.className !== 'toggle') {
       this.stopAutomate();

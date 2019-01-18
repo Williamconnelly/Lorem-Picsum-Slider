@@ -1,8 +1,9 @@
 <div *ngIf="slides.length > 0" class="slider">
   <div class="wrapper">
+    <header class="header"><a href="https://picsum.photos/">Lorem Picsum Slider</a></header>
     <div class="container">
       <figure *ngFor="let slide of slides" class="slide">
-        <img src="{{ slide.url }}" alt="{{ slide.post_url }}" />
+        <img src="{{ slide.url }}" alt="{{ slide.post_url }}" (click)="openModal(slide)"/>
       </figure>
     </div>
     <div class="option-tray">
@@ -12,6 +13,12 @@
         Automate: <span *ngIf="interval === null; else toggleOn">Off</span>
         <ng-template #toggleOn>On</ng-template>
       </button>
+    </div>
+  </div>
+  <div id="imgModal" class="modal">
+    <div class="modal-content">
+      <img *ngIf="modalImg" src="{{ modalImg.url }}" alt="{{ modalImg.post_url }}">
+      <span (click)="closeModal()" class="modal-btn">&times;</span>
     </div>
   </div>
 </div>

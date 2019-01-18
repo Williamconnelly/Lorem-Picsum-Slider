@@ -20,6 +20,7 @@ export class SliderComponent implements OnInit {
   currentIndex = 0;
   // Upper-scope variable so that different methods can start and stop it
   interval = null;
+  modalImg: Slide;
   constructor(private _slideService: SlideService) { }
 
   ngOnInit() {
@@ -34,16 +35,27 @@ export class SliderComponent implements OnInit {
     });
     // Add event listeners for arrow keys
     window.onkeydown = event => {
+      console.log(event);
       if (event.key === 'ArrowRight') {
         this.nextSlide(event);
       }
       if (event.key === 'ArrowLeft') {
         this.previousSlide(event);
       }
+      // if (event.key === ' ') {
+      //   this.toggleAutomate(event);
+      // }
+      if (event.key === 'Escape') {
+        this.closeModal();
+      }
+    };
+    window.onclick = event => {
+
     };
   }
   // Advance slideshow forwards
   nextSlide(e) {
+    console.log(e);
     // If the interval is running, clear it when invoked by user input
     if (e.target.classList[0] !== 'toggle') {
       this.stopAutomate();
@@ -108,7 +120,17 @@ export class SliderComponent implements OnInit {
   }
   // Clears automate interval
   stopAutomate() {
-  clearInterval(this.interval);
+    clearInterval(this.interval);
     this.interval = null;
+  }
+  openModal(src) {
+    this.modalImg = src;
+    this.stopAutomate();
+    const modal = document.getElementById('imgModal');
+    modal.style.display = 'block';
+  }
+  closeModal() {
+    const modal = document.getElementById('imgModal');
+    modal.style.display = 'none';
   }
 }

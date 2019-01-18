@@ -1,15 +1,17 @@
 <div *ngIf="slides.length > 0" class="slider">
-  <div class="container">
-    <figure *ngFor="let slide of slides" class="slide">
-      <img src="{{ slide.url }}" alt="{{ slide.post_url }}" />
-    </figure>
-    <a (click)=previousSlide($event) class="prev">&#10094;</a>
-    <a (click)=nextSlide($event) class="next">&#10095;</a>
+  <div class="wrapper">
+    <div class="container">
+      <figure *ngFor="let slide of slides" class="slide">
+        <img src="{{ slide.url }}" alt="{{ slide.post_url }}" />
+      </figure>
+    </div>
+    <div class="option-tray">
+      <button (click)="previousSlide($event)" class="button">&#10094; Previous</button>
+      <button (click)="nextSlide($event)" class="button">Next &#10095;</button>
+      <button [ngClass]="interval === null ? 'innactive' : 'active'" (click)="toggleAutomate($event)" class="toggle button">
+        Automate: <span *ngIf="interval === null; else toggleOn">Off</span>
+        <ng-template #toggleOn>On</ng-template>
+      </button>
+    </div>
   </div>
 </div>
-<!-- <button (click)=previousSlide($event) class="prev">PREV</button>
-<button (click)=nextSlide($event) class="next">NEXT</button> -->
-<button (click)="toggleAutomate($event)" class="toggle">TOGGLE AUTO</button>
-<!--
-<a (click)=previousSlide($event) class="prev">&#10094;</a>
-<a (click)=nextSlide($event) class="next">&#10095;</a> -->

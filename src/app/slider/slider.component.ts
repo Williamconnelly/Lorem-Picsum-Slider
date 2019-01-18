@@ -32,11 +32,20 @@ export class SliderComponent implements OnInit {
         slide.url = `http://source.unsplash.com/${slide.post_url.split('/')[slide.post_url.split('/').length - 1]}`;
       });
     });
+    // Add event listeners for arrow keys
+    window.onkeydown = event => {
+      if (event.key === 'ArrowRight') {
+        this.nextSlide(event);
+      }
+      if (event.key === 'ArrowLeft') {
+        this.previousSlide(event);
+      }
+    };
   }
   // Advance slideshow forwards
   nextSlide(e) {
     // If the interval is running, clear it when invoked by user input
-    if (e.target.className !== 'toggle') {
+    if (e.target.classList[0] !== 'toggle') {
       this.stopAutomate();
     }
     // Grab all slide elements
